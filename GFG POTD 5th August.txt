@@ -1,0 +1,60 @@
+// GFG POTD (5th August)
+// Bottom View Of Binary Tree.
+
+// Easy approach se isko solve kar liye hai.(CodeKarLo).
+/*
+    Basically jaise view ke question me karte hai indexing +1/-1 waise hi karna hai.
+    Aur map me corresponding value ko daalte rehna hai.
+*/
+class Solution {
+  public:
+    vector <int> bottomView(Node *root) {
+        vector<int> ans;// yahi return hoga.
+        // Queue me Node aur uska position daal denge.
+        queue<pair<Node*,int>> q;
+        
+        // Map me hum us position par aaane wale latest value ko daal denge.
+        map<int,int> mp;
+        
+        // Maxi and mini nikaal lene se ek order me answer mil jayega.
+        // Nahi to humko sort karna padta.
+        int maxi=0,mini=0;
+        
+        // Root ka position daal denge.
+        q.push({root,0});
+        
+        while(!q.empty()){
+            auto temp = q.front();
+            q.pop();
+            
+            // Ye node ko store karega.
+            Node* a = temp.first;
+            
+            // Ye position ko store karta.
+            int b = temp.second;
+            
+            // map me daal denge us position ka value.
+            mp[b] = a->data;
+            
+            // Minimum and maximum position nikaal lenge.
+            mini = min(mini,b);
+            maxi = max(maxi,b);
+            
+            // Left me hai to -1 postion ke saath.
+            if(a->left)
+                q.push({a->left,b-1});
+             
+            // Right me hai to +1 postion ke saath.   
+            if(a->right)
+                q.push({a->right,b+1});
+        }
+        
+        // Ab saare position ka value nikaal lenge.
+        for(int i=mini;i<=maxi;i++){
+            ans.push_back(mp[i]);
+        }
+        
+        // Final answer vector.
+        return ans;
+    }
+};
