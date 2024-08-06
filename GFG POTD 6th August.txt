@@ -1,0 +1,53 @@
+// GFG POTD 6th August
+// Validate an IP Address.
+
+class Solution {
+  public:
+    int isValid(string str) {
+        // code here
+        int n = str.size();
+        int temp = 0;// ye har bane hue number ko validate karega.
+        int dot = 0;// ye total points ko calc. karega.
+        
+        // hume leading 0 nahi cahhiye.
+        for(int i=0;i<n;i++){
+            // Starting me hi 0 ho.
+            if(i==0 && str[i]=='0')
+                return false;
+            
+            // dots ko count kar lenge.
+            if(str[i]=='.')
+                dot++;
+                
+            // saath me 2 dot nahi hone chaiye.
+            if(i<n-1 && (str[i]=='.' && str[i+1]=='.'))
+                return false;
+                
+            // Dekh rahe hai ki har form ke start me 0 to nahi na hai.
+            if((i>0 && i<(n-1)) && (str[i-1]=='.') &&(str[i]=='0') && (str[i+1]!='.'))
+                return false;
+            
+            // Number form kar rahe hai.
+            if(str[i]!='.'){
+                temp=temp*10 + (str[i]-'0');
+            }
+            else{
+                // Number 255 ko cross kiya to false
+                if(temp>255)
+                    return 0;
+                // New number se comparison karenge.
+                temp = 0;
+            }
+        }
+        // Last wale number ka bhi check hoga.
+        if(temp>255)
+            return 0;
+        
+        // dot exactly 3 hona chahiye.
+        if(dot!=3)
+            return 0;
+            
+        // Sab kuch sahi hai to true.
+        return 1;
+    }
+};
