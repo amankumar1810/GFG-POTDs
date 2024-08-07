@@ -1,0 +1,43 @@
+// K-th element of two Arrays (7th August)
+
+class Solution {
+  public:
+    // Not a perfect Expected Method.
+    // Isko Binary Search se padhna hai.
+    
+    int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
+        // Merge two sorted Array wala approach hai.
+        // Kyu ki isme k-th element chhiye to isme array nahi banaye hai.
+        // Bas index mil jaane par return kar diye hai.
+        int n = arr1.size(),m = arr2.size();
+        int i=0,j=0,d=0;
+        while(i<n && j<m){
+            if(arr1[i]<arr2[j]){
+                d++;
+                if(d==k)
+                    return arr1[i];
+                i++;
+            }
+            else{
+                d++;
+                if(d==k)
+                    return arr2[j];
+                j++;
+            }
+        }
+        while(i<n){
+            d++;
+            if(d==k)
+                return arr1[i];
+            i++;
+        }
+        while(j<m){
+            d++;
+            if(d==k)
+                return arr2[j];
+            j++;
+        }
+        
+        return -1;
+    }
+};
