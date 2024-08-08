@@ -1,0 +1,34 @@
+// GFG POTD 8th August (Sum Tree)
+
+class Solution {
+  public:
+    // Sum nikaal rahe hai.
+    int solve(Node *root){
+        // base case
+        if(root==NULL)
+            return 0;
+        // left and right subtree ka sum.
+        int left = solve(root->left);
+        int right = solve(root->right);
+        
+        // Khud ka data add karna mat bhulna.
+        return root->data+left+right;
+    }
+    
+    bool isSumTree(Node* root) {
+        // Your code here
+        // Agar root NULL hai ya leaf node hai to true.
+        if(root==NULL || (root->left==NULL && root->right==NULL))
+            return true;
+            
+        // baaki saare cases mein node ka value pure left subtree and pure right 
+        // subtree ke sum ke equal hona chahiye. 
+        if(root->left!=NULL || root->right!=NULL){
+            if(root->data != solve(root->left)+solve(root->right))
+                return false;
+        }
+        
+        // Har node ye follow karna chahiye.
+        return isSumTree(root->left) && isSumTree(root->right);
+    }
+};
