@@ -1,0 +1,18 @@
+// 9th August POTD
+// Maximize Array Value After Rearrangement
+
+class Solution {
+  public:
+    int Maximize(vector<int> &arr) {
+        // long integer ka thoda sa confusion hai yaha par.
+        int ans = 0;
+        int mod = 1e9+7;
+        int n = arr.size();
+        sort(arr.begin(),arr.end());
+        for(int i=0;i<n;i++){
+            // arr[i] ko long mein convert karna jaruri hai addition se pehle.
+            ans = (ans+((long)arr[i]*i)%mod)%mod;
+        }
+        return ans%mod;
+    }
+};
