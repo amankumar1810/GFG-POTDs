@@ -1,0 +1,45 @@
+// Rotate a Linked List.
+
+class Solution {
+  public:
+    // Function to rotate a linked list.
+    /*
+        POTD ka ye question Khud se ban gaya tha 15 minutes mein.
+        Logic easy hai, hume left rotate karna hai.
+        
+        By obseravtion dikh raha ahi ki jitne k se left rotate karna hai
+        waha se start hoga aur last wal first se add ho jaayega.
+        
+        k==no. of nodes hone par runtime error de raha tha, isi liye usko
+        alag se deal kiye hai.
+    */
+    Node* rotate(Node* head, int k) {
+        // Your code here
+        Node *curr = head,*prev = NULL;
+        Node *temp = head;
+        int cnt = 1;// nodes ko count karne ke liye.
+        
+        // temp ko last node par point kara liye hai.
+        while(temp->next!=NULL){
+            temp = temp->next;
+            cnt++;
+        }
+        //Pura rotate hokar wahi return ho jaayega list.
+        if(k==cnt)
+            return head;
+            
+        // k ka jo value hai wahi se new head start hoga.
+        while(k>0){
+            prev = curr;
+            curr = curr->next;
+            k--;
+        }
+        
+        // usse pehle ka link break kar denge.
+        // Last wale ko satrt se add kar denge.
+        temp->next = head;
+        prev->next = NULL;
+        
+        return curr;
+    }
+};
