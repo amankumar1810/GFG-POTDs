@@ -1,0 +1,40 @@
+// Job Sequencing Problem (Medium)
+
+class Solution 
+{
+    public:
+    // maximum profit ke hisaab se sort karenge taaki jyada profit wala kaam ho sake.
+    static bool comp(Job job1,Job job2){
+        return job1.profit>job2.profit;
+    }
+    vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        
+        //profit ko maximize karna hai to chahenge ki jyada profit wala kaam kare.
+        // har kaam ko deadline ke last me hi karenge taaki baaki kaam hi kiya jaa sake.
+        
+        
+        int cnt = 0,profits = 0;
+        sort(arr,arr+n,comp);
+        int hdead = 0;
+        for(int i=0;i<n;i++)
+            hdead = max(hdead,arr[i].dead);
+        // highest deadline nikaal kar 1 jyada size ka array banayenge aur sab me 0 rakhnege.
+        // har index array ka time slot ko batayega.
+        
+        int slots[hdead+1] = {0};
+        
+        for(int i=0;i<n;i++){
+            for(int j=arr[i].dead;j>0;j--){
+                if(slots[j]==0){
+                    // 0 matlab us time instant par koi kaam hua hi nahi hai.
+                    cnt++;
+                    profits+=arr[i].profit;
+                    slots[j]=1;// ab kaam ho gya hai to is time par koi aur kaam  nahi ho sakta.
+                    break;
+                }
+            }
+        }
+        return {cnt,profits};
+    } 
+};
