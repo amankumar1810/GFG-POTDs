@@ -1,0 +1,43 @@
+// Sum of Middle elements of two sorted arrays.
+
+/*
+    Ye best method nahi hai.
+    Best method mein Binary Search use hoga.
+    
+    Isme bina sort kiye hi hum dono ka mid position nikaal liye hai.
+    Aur unka sum return kar diye hai.
+*/
+class Solution {
+  public:
+    int SumofMiddleElements(vector<int> &arr1, vector<int> &arr2) {
+        // Logic ye samajhne wala hai.
+        
+        int n = arr1.size();
+        int i=0,j=0;
+        int val1=-1,val2=-1;
+        
+        for(int cnt=0;cnt<=n;cnt++){
+            if(i==n){
+                val1 = val2;
+                val2 = arr2[0];
+            }
+            else if(j==n){
+                val1 = val2;
+                val2 = arr1[0];
+            }
+            else{
+                if(arr1[i]<=arr2[j]){
+                    val1 = val2;
+                    val2 = arr1[i];
+                    i++;
+                }
+                else{
+                    val1 = val2;
+                    val2 = arr2[j];
+                    j++;
+                }
+            }
+        }
+        return (val1+val2);
+    }
+};
