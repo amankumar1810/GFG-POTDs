@@ -1,0 +1,41 @@
+//Longest Common Substring(Medium)
+
+
+class Solution {
+  public:
+    int longestCommonSubstr(string str1, string str2) {
+        // Easy question hi tha ye DP ka.
+        /*
+            Article padhkar samajh gaye hai.
+            Isme hume longest sub-string chahiye na ki prefix.
+            
+            Dp array mein store kara rahe hai sab ke liye answer.
+            1st row and 1st column ke liye 0 hi hoga answer.
+            
+            Baaki mein dekh rahe hai ki kya aa raha hai same to previous+1 hoga.
+        */
+        int m = str1.size();
+        int n = str2.size();
+        
+        vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+        int maxi = 0;
+        for(int i=0;i<=m;i++){
+            for(int j=0;j<=n;j++){
+                // 1st row and column
+                if(i==0 || j==0)
+                    dp[i][j]=0;
+                
+                // Same hone par.
+                else if(str1[i-1]==str2[j-1]){
+                    dp[i][j] = dp[i-1][j-1]+1;
+                    maxi = max(maxi,dp[i][j]);// answer update.
+                }
+                
+                // Nahi to 0.
+                else
+                    dp[i][j]=0;
+            }
+        }
+        return maxi;
+    }
+};
