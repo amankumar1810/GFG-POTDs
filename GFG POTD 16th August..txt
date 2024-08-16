@@ -1,0 +1,34 @@
+// Maximize the cut segments.
+
+// Eksum standard question hai ye DP ka.
+// Har baar minimum cut lagakar maximum no. of cuts karenge.
+// Isme bina DP ke in-future galat answer de dega.
+class Solution
+{
+    public:
+    int solve(int n,int x,int y,int z,vector<int> &dp){
+        // Jo maximum dega teeno me se, wahi return hoga.
+        
+        // Agar (-)ve gaya matlab isko consider karna hi nahi hai.
+        if(n<0)
+            return INT_MIN;
+        // base case.
+        if(n==0)
+            return 0;
+        if(dp[n]!=-1)
+            return dp[n];
+        // Maximum value.
+        return dp[n] = 1+max({solve(n-x,x,y,z,dp),solve(n-y,x,y,z,dp),solve(n-z,x,y,z,dp)});
+    }
+    
+    //Function to find the maximum number of cuts.
+    int maximizeTheCuts(int n, int x, int y, int z)
+    {
+        //Your code here
+        vector<int> dp(n+1,-1);
+        int ans = solve(n,x,y,z,dp);
+        
+        // minus ale answwr ko deal karne ke liye jab 1 bhi cut naa ho paaye aur INT_MIN waal answer aa raha ho.
+        return ans<0?0:ans;
+    }
+};
