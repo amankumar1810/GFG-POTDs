@@ -1,0 +1,35 @@
+// Split an array into two equal Sum subarrays (GFG POTD 18th August).
+
+class Solution {
+  public:
+    bool canSplit(vector<int>& arr) {
+        // code here
+        int n = arr.size();
+        
+        /*
+            2 equal half mein break karna hai.
+            Aage se sum nikaalte rahenge.
+            Hume har subarray ka sum pure sum ke half ke equal hona chahiye.
+            Agar greater hua to pakka nahi hoga.
+            Equal hua tab hi hoga.
+        */
+        long long sum = 0;
+        for(auto &i:arr)
+            sum+=i;
+        // odd sum ko 2 half mein break nahi kar paayenge.
+        if(sum%2)
+            return false;
+        int i=0;
+        int temp = 0;
+        int req = sum/2;// dono me se har ka sum itna hona chahiye.
+        while(i<n){
+            temp += arr[i];
+            if(temp==req)
+                return true;
+            if(temp>req)
+                return false;
+            i++;
+        }
+        return false;
+    }
+};
