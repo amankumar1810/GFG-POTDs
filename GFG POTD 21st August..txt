@@ -1,0 +1,50 @@
+// GFG POTD 21st August. (Shortest Path in undirected Graph).
+
+class Solution {
+  public:
+    vector<int> shortestPath(vector<vector<int>>& edges, int N,int M, int src){
+        // code here
+        /*
+            Striver se sikhe hai ye.
+            Isme basically hume unit weight diya hai.
+            Usme se shortesst dist. nikaalna hai.
+            
+            Hum sab ka dist. infinite rakh lenge aur agar samll mile to modifyu kar denge.
+        */
+        
+        // sabse pehle adjacency list bana diye hai.
+        vector<int> adj[N];
+        for(auto &it:edges){
+            // kyu ki ye undirected graph hai to dono taraf se.
+            adj[it[0]].push_back(it[1]);
+            adj[it[1]].push_back(it[0]);
+        }
+        
+        vector<int> dist(N,1e9);
+        dist[src] = 0;// src se src ka distance =0 
+        
+        // Ab BFS lagana hai.
+        queue<int> q;
+        q.push(src);
+        while(!q.empty()){
+            int curr = q.front();
+            q.pop();
+            
+            // agar small distance mila to modify karenge.
+            for(auto &node :adj[curr]){
+                if(dist[curr]+1<dist[node]){
+                    dist[node] = 1+dist[curr];
+                    q.push(node);
+                }
+            }
+        }
+        
+        // Jo 1e9 reh gaya wo unreachable hai, usko -1 karn hai.
+        vector<int> ans(N,-1);
+        for(int i=0;i<N;i++){
+            if(dist[i]!=1e9)
+                ans[i] = dist[i];
+        }
+        return ans;
+    }
+};
