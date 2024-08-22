@@ -1,0 +1,58 @@
+// Left View of Binary Tree(GFG).
+
+/*
+    Ye Striver ka badhiya method hai.
+    Isme har level par jo 1st node aa raha hai,usko hi consider karna hai.
+*/
+void solve(Node *root,vector<int> &ans,int level){
+    if(!root)
+        return;
+    if(level==ans.size())
+        ans.push_back(root->data);
+    solve(root->left,ans,level+1);
+    solve(root->right,ans,level+1);
+}
+
+vector<int> leftView(Node *root)
+{
+   /*
+        Isme bhi same kaam kiye hai but yaha par BFS generate karke 1st 
+        element le liye hai.
+        
+        Thoda space jyada lag gaya hai yaha par.
+   */
+/*  
+  vector<vector<int>> levels;
+  queue<Node*> q;
+  q.push(root);
+   
+  while(!q.empty()){
+        int sz = q.size();
+        vector<int> temp;
+        for(int i=0;i<sz;i++){
+            Node *curr = q.front();
+            q.pop();
+            if(curr->left){
+                q.push(curr->left);
+            }
+            if(curr->right){
+                q.push(curr->right);
+            }
+            temp.push_back(curr->data);
+        }
+        levels.push_back(temp);
+  }
+   
+  vector<int> ans;
+  for(auto &i:levels){
+      ans.push_back(i[0]);
+  }
+   
+   return ans;
+   
+*/
+
+    vector<int> ans;
+    solve(root,ans,0);
+    return ans;
+}
