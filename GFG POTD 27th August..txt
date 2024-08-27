@@ -1,0 +1,48 @@
+// Maximum Difference (GFG POTD).
+
+/*
+    Iska pre-requisite hai Next Greater and Next Smaller element using Stack.
+    Iske baad easy hai question ye.
+    
+    ek right array bana lenge next smaller ka.
+    
+    left mein main array ko reverse karke next smaller banayenge aur usko 
+    phir reverse karke left array bana lenge.
+    
+    Ab dono mein se maximum difference find kar lenge.
+*/
+class Solution {
+  public:
+    // Next Smaller Element generate karne wala function.
+    vector<int> nextSmaller(vector<int> &arr){
+        int n = arr.size();
+        stack<int> stk;
+        vector<int> ans(n);
+        for(int i=n-1;i>=0;i--){
+            while(!stk.empty() && stk.top()>=arr[i])
+                stk.pop();
+            ans[i] = stk.empty()?0:stk.top();
+            stk.push(arr[i]);
+        }
+        return ans;
+    }
+    
+    /*You are required to complete this method */
+    int findMaxDiff(vector<int> &arr) {
+        // Your code here
+        int n = arr.size();
+        vector<int> right(n);
+        right = nextSmaller(arr);
+        
+        reverse(arr.begin(),arr.end());
+        vector<int> left(n);
+        left = nextSmaller(arr);
+        reverse(left.begin(),left.end());
+        
+        int maxi = 0;
+        for(int i=0;i<n;i++)
+            maxi = max(maxi,abs(left[i]-right[i]));
+            
+        return maxi;
+    }
+};
