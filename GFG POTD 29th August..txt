@@ -1,0 +1,50 @@
+// Find Length of Loop (GFG).
+
+/*
+    Basically hume agar loop hai to uska length return karna hai.
+    Hum basic approach use karne waale hai yaha par.
+    
+    Loop check kar liye hai.
+    Agar loop nahi hai tab 0.
+    
+    Agar hai to length nikaale hai.
+*/
+class Solution {
+  public:
+  
+    // Function to find the length of a loop in the linked list.
+    int countNodesinLoop(Node *head) {
+        // Base case (Agar node hi naa ho ya ek hi node ho wur wo bhi jiska next NULL ho.)
+        if(head == NULL || head->next == NULL)
+            return 0;
+            
+        // Slow-Fast pointer to check loop.
+        Node *slow = head,*fast = head;
+        while(fast!=NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            
+            // Agar loop hai tab hi break hoga.
+            if(slow==fast)
+                break;
+        }
+        
+        // Agar break nahi hua hai matlab loop nahi hai.
+        if(slow!=fast)
+            return 0;
+            
+        /*
+            Loop ka length aise nikaale hai jaise slow se lekar ek pehle tak node
+            count kar liye hai.
+            
+            Agar slow==fast and count=0 karte to while loop run hi nahi hota.
+            
+        */
+        int count = 1;
+        while(slow->next!=fast){
+            count++;
+            slow = slow->next;
+        }
+        return count;
+    }
+};
