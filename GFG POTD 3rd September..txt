@@ -1,0 +1,36 @@
+// Minimum number of deletions and insertions (GFG)
+
+
+/*
+    Bahut easy question hai ye.
+    Hume string1 mein modification karna hai, string2 mein kuch nahi kar sakte.
+    
+    LCS nikaal lenge.
+    1st string me jo LCS se faaltu hai usko delete karna hai
+    2nd string mein jo LCS se faaltu hai usko add karna hai.
+    
+    Total operations = m+n-2*LCS.
+*/
+class Solution{
+	private:
+	// Ye to padhe hi ho.
+	int longestCommonSubsequence(string str1,string str2,int i,int j,vector<vector<int>> &dp){
+	    if(i<0 || j<0)
+	        return 0;
+	    if(dp[i][j]!=-1)
+	        return dp[i][j];
+	    if(str1[i]==str2[j])
+	        return dp[i][j] = 1+longestCommonSubsequence(str1,str2,i-1,j-1,dp);
+	    return dp[i][j] = max(longestCommonSubsequence(str1,str2,i,j-1,dp),longestCommonSubsequence(str1,str2,i-1,j,dp));
+	}
+
+	public:
+	int minOperations(string str1, string str2) 
+	{ 
+	    // Your code goes here
+	    int m = str1.size(),n = str2.size();
+	    vector<vector<int>> dp(m,vector<int>(n,-1));
+	    int temp = longestCommonSubsequence(str1,str2,m-1,n-1,dp);
+	    return m+n-2*temp;
+	} 
+};
