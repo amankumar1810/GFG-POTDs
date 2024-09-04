@@ -1,0 +1,15 @@
+// Count ways to N'th Stair(Order does not matter) (Medium).
+
+/*
+    Itna simple hai ki kuch baat hi naa karo.
+    Kyu ki order matter nahi kar raha hai.
+    To hum 2 stair wala saari possiblity dekh lenge.
+    
+*/
+class Solution{
+	public:
+		int nthStair(int n){
+		    //  Is formula se generalized answer mil jaayega.
+		    return n/2+1;
+		}
+};
