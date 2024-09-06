@@ -1,0 +1,24 @@
+// Kadane's Algorithm. (Medium).
+
+class Solution {
+  public:
+    // Hume maximum subarray ka sum nikaalna hai.
+    /*
+        Sum nikaalte jaayenge aur har moment par uska maximum lete jaayenge.
+    */
+    long long maxSubarraySum(vector<int> &arr) {
+        
+        long long sum = 0;
+        long long ans = INT_MIN;
+        
+        for(int i=0;i<arr.size();i++){
+            sum+=arr[i];
+            ans = max(ans,sum);
+            
+            // Jo negative de raha hai usko consider hi nahi karna hai.
+            if(sum<0)
+                sum = 0;
+        }
+        return ans;
+    }
+};
