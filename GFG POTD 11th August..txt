@@ -1,0 +1,31 @@
+// Minimum Cost of Ropes (Easy)
+
+#define ll long long
+class Solution {
+  public:
+    // Hume coxt ko minimize karna hai.
+    // 2 ropes ko add karne ka cost dono ke cost ka sum ho rha hai.
+    // Har baar 2 minimum wala le rahe hai.
+    
+    long long minCost(vector<long long>& arr) {
+        // Your code here
+        priority_queue<ll,vector<ll>,greater<ll>> pq;
+        
+        // pq me daal diye hai sabhi ko.
+        for(auto &i:arr)
+            pq.push(i);
+            
+        ll ans = 0;
+        while(pq.size()>1){
+            // Har baar 2 chhota elements nikaal kar 
+            // unka sum ko answer me add kar de rahe hai.
+            ll a = pq.top();
+            pq.pop();
+            ll b = pq.top();
+            pq.pop();
+            ans += (a+b);
+            pq.push(a+b);
+        }
+        return ans;
+    }
+};
