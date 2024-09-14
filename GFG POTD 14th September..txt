@@ -1,0 +1,43 @@
+// Alternate positive and negative numbers (Easy).
+
+
+// Refer LC 2149.
+/*
+    Usi array ko modify nahi karna hai.
+    Pos and neg ko alaga alag store karke phir chnage kar do.
+*/
+class Solution {
+  public:
+
+    void rearrange(vector<int> &arr) {
+        // code here
+        int n = arr.size();
+        
+        // Dono alag alag vector mein.
+        vector<int> pos,neg;
+        for(auto &i:arr){
+            if(i>=0)
+                pos.push_back(i);
+            else
+                neg.push_back(i);
+        }        
+        int i=0,j=0,k=0;
+        while(i<n && j<pos.size() && k<neg.size()){
+            // even position par pos and odd par neg.
+            if(i%2==0)
+                arr[i] = pos[j++];
+            else
+                arr[i] = neg[k++];
+            i++;
+        }
+        
+        // Dono equal amount mein nahi hai.
+        
+        // Jo bacha reh gaya last mein pura wo daal do.
+        while(j<pos.size())
+            arr[i++] = pos[j++];
+        
+        while(k<neg.size())
+            arr[i++] = neg[k++];
+    }
+};
