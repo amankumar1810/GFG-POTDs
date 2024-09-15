@@ -1,0 +1,48 @@
+// Binary Tree to DLL (Hard).
+
+// CodeKarLo se sikhe hai.
+/*
+    Ek dum visualize karne wala hai ye question.
+    Hume doubly Linked List banana hai matlab prev and next dono pointer hoga.
+    prev = left and next = right.
+    
+    Basically DLL Inorder traversal hi DLL hoga, bus sahi se link banana hai.
+    
+*/
+class Solution {
+  public:
+    // head first node ke liye hai aur lastNode prev node se link karne mein help karega.
+    Node *head = NULL,*lastNode = NULL;
+    
+    void solve(Node *root){
+        // Basically Inorder wala pura logic chal raha hai.
+        // Jaha par vector mein push karte hai, waha par hume kuch operation karna hai.
+        if(root==NULL)
+            return;
+        
+        // Left mein call.
+        solve(root->left);
+        
+        // Is case mein DLL ka 1st node banega.
+        if(head==NULL)
+            head = root;
+        
+        // Agar lastNode hai to wo curr node ke prev ke roop mein rahega.
+        if(lastNode!=NULL)
+            lastNode->right = root; // lastNode ke baad root.
+        
+        // lastNode ke pehle root.
+        root->left = lastNode;
+        
+        // Har baar update bhi hoga wo.
+        lastNode = root;
+        
+        // right mein call.
+        solve(root->right);
+    }
+    Node* bToDLL(Node* root) {
+        // code here
+        solve(root);
+        return head;
+    }
+};
