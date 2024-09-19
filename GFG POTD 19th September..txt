@@ -1,0 +1,52 @@
+// Reverse Words (Easy).
+
+class Solution {
+  public:
+    // Easy hai bahut ye question.
+    /*
+        Logic ye hai ki hume saare words ko reverse karna hai.
+        Words ke beech me dot daalna hai.
+        
+        Saara words ko nikaal lenge.
+        Unko reverse kar denge.
+        Sab ko add karke unke beech me dot lagate jaayenge.
+    */
+    string reverseWords(string str) {
+        // code here
+        vector<string> words;// isi mein saare words add honge.
+        int i=0,j=0;
+        int n = str.size();
+        while(j<n){
+            if(str[j]!='.')
+                j++;
+            else{
+                // dot nahi daalna hai, sirf words hi.
+                string temp = str.substr(i,(j-i));
+                words.push_back(temp);
+                i = j+1;
+                j++;
+            }
+        }
+        // Last mein bane word ko bhi daal diye hai.
+        string temp = str.substr(i,(j-i+1));
+        words.push_back(temp);
+        
+        // Pure words array ko reverse kar diye hai.
+        reverse(words.begin(),words.end());
+        
+        string ans = "";
+        for(int ch=0;ch<words.size();ch++){
+            // Ek ek karke words ko ansswer string mein daalenge.
+            // Unke beech me dot bhi dena hai.
+            ans+=words[ch];
+            
+            // yaad se last wale mein dot nahi hoga.
+            if(ch!=words.size()-1)
+                ans+=".";
+        }
+        
+        // Final Answer.
+        return ans;
+    }
+    
+};
