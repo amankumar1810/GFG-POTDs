@@ -1,0 +1,59 @@
+// Smallest window in a string containing all the characters of another string (Hard).
+
+// Tough conceptual queston hai sliding window ka.
+class Solution
+{
+    public:
+    /*
+        Hum basically pehle ek pura substring consider karenge jisme ye pura string p aa jaaye.
+        
+        Ab unnecessary letters ko aage se nikaalte jaayenge.
+        Jab kam hone lage letters required se tab ruk jaana hai.
+    */
+    string smallestWindow (string s, string p)
+    {
+        // Freq. store karke no. of unique characters count kar lenge.
+        vector<int> v(26,0);
+        int cnt = 0;
+        for(auto &i:p){
+            if(v[i-'a']==0)
+                cnt++;
+            v[i-'a']++;
+        }
+        
+        // Ab string s mein dekhenge ki kaha tak starting se lene par pura string p aa raha hai. 
+        int i=0,j=0,ans=INT_MAX,start=0;
+        while(j<s.size()){
+            v[s[j]-'a']--;
+            // 0 hone ka matlab hai character puri freq. tak aa gaya.
+            if(v[s[j]-'a']==0)
+                cnt--;
+             
+            // Jab saare characters aa jaaye tab window shrink hoga.   
+            if(cnt==0){
+                // Jab koi character miss hone lage tab rukna hai.
+                while(cnt<1){
+                    v[s[i]-'a']++;
+                    
+                    // length nikaal rahe hai aur starting point.
+                    if(ans>(j-i+1)){
+                        ans = j-i+1;
+                        start = i;
+                    }
+                    // 1 hone ka matlab hai wo character chhut raha hai, to break karo.
+                    if(v[s[i]-'a']==1)
+                        cnt++;
+                    i++;
+                }
+            }
+            j++;
+        }
+        
+        // Agar saare character present hi na ho to cnt = 0 nahi hoga aur if ke andar nahi jaayega.
+        if(ans == INT_MAX)
+            return "-1";
+            
+        // Nahi to required length ka substring return kar denge.
+        return s.substr(start,ans);
+    }
+};
