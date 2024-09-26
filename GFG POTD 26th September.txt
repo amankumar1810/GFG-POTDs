@@ -1,0 +1,25 @@
+// Roof Top(Easy).
+
+class Solution {
+  public:
+    /*
+        Bada easy question hai ye.
+        Isme continuously kitni baar increase ho raha hai, bas usko count karna hai.
+    */
+    int maxStep(vector<int>& arr) {
+        // Your code here
+        int cnt=0;// local
+        int ans=0;// answer
+        for(int i=1;i<arr.size();i++){
+            // strictly increasing
+            if(arr[i]>arr[i-1])
+                cnt++;
+            else
+                cnt=0;
+            ans = max(ans,cnt); // har baar modify.
+        }
+        // Last wala bhi check karna jaruri hai.
+        ans = max(ans,cnt);
+        return ans;
+    }
+};
