@@ -1,0 +1,22 @@
+// Total Count (Easy).
+
+// bahut hi Easy Question hai.
+/*
+    Basically minimum numbers ke group mein break karna hai element ko.
+    Taaki har value k se small ya equal ho.
+    
+    Har baar k mein break karenge aur jo remainder bach jaaye usko consider kar lenge one unit.
+*/
+class Solution {
+  public:
+    int totalCount(int k, vector<int>& arr) {
+        // code here
+        int cnt = 0;
+        for(auto &i:arr){
+            cnt+=(i/k);
+            if(i%k)
+                cnt++;
+        }
+        return cnt;
+    }
+};
