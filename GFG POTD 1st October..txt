@@ -1,0 +1,32 @@
+// Multiply two Linked List. (Easy).
+
+/* Multiply contents of two linked lists */
+
+// Bahut hi straight forward question hai ye.
+/*
+    Bus generate kar lenge number ko dono LL se.
+    Uske baad unka product nikaal lo.
+    
+    Har baar mod le lenge taaki overflow na ho.
+*/
+class solution {
+#define mod 1000000007  // globally defined.
+    private:
+        long long value(Node *node){
+            long long val = 0;
+            while(node){
+                val = val*10+node->data;
+                val%=mod;
+                node = node->next;
+            }
+            return val%mod;
+        }
+  public:
+    long long multiplyTwoLists(Node *first, Node *second) {
+        // code here
+        long long num1 = value(first);
+        long long num2 = value(second);
+        
+        return ((num1%mod)*(num2%mod))%mod;
+    }
+};
