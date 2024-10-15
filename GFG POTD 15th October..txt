@@ -1,0 +1,22 @@
+// Subarray range with given sum (Medium).
+
+class Solution {
+  public:
+    // Leetcode ka Subarray sum equals k question hai ye.
+    
+    int subArraySum(vector<int>& arr, int tar) {
+        // Your code here
+        int sum = 0;
+        int ans = 0;
+        
+        unordered_map<int,int> mp;
+        mp[0] = 1;
+        for(auto &i:arr){
+            sum+=i;
+            if(mp.find(sum-tar)!=mp.end())
+                ans+=mp[sum-tar];
+            mp[sum]++;
+        }
+        return ans;
+    }
+};
