@@ -1,0 +1,34 @@
+// Two Swaps(Easy)
+
+// Bahut hi acha question hai ye.
+/*
+    Basically hume array ko sort karte rehna hai.
+    1 to N tak hi value hoga isme.
+    
+    Agar already sorted hai ya 2 swaps mein sort ho paayega, to true.
+    
+*/
+class Solution {
+  public:
+    bool checkSorted(vector<int> &arr) {
+        // code here.
+        int n = arr.size();
+        int cnt = 0;
+        for(int i=0;i<n;i++){
+            // Agar apne position par nahi hai, to iske position par jo hai usse sort kar denge isko.
+            if(arr[i]!=(i+1)){
+                swap(arr[i],arr[arr[i]-1]);
+                cnt++;
+                // ye wala to sahi position par chala gaya.
+                // But yaha par sahi value aaya hoga iska guarantee nahi hai.
+                i--;
+            }
+            
+            // Maximum 2 hi swap karna hai.
+            if(cnt>2)
+                return false;
+        }
+        // 0 yaani already sorted, isko bhi hum 2 baar swap karke pehle jaisa bana sakte hai.
+        return cnt==0 || cnt==2;
+    }
+};
