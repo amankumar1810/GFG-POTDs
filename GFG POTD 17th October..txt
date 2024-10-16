@@ -1,0 +1,30 @@
+// Split Linked List Alternatingly(Easy).
+
+// Kaafi research ke baad ye question bana hai.
+/*
+    Even and odd dono ke case mein alag-alag hoga,isi me dimaag lagana hai,
+    Har node ko uske next ke next se connect karne jaayenge.
+    
+    Baaki 1st and 2nd node ka reference store kiye rahenge, usi ko return karna hai.
+    Dry run karke dekho ek baar even and odd number of nodes lekar, samajh jaaoge.
+*/
+
+class Solution {
+  public:
+    // Function to split a linked list into two lists alternately
+    vector<Node*> alternatingSplitList(struct Node* head) {
+        // Your code here
+        Node *head1 = head,*head2 = head->next;
+        Node *h1 = head1,*h2 = head2;
+        while(head1->next && head2->next){
+            head1->next = head1->next->next;
+            head1 = head1->next;
+            
+            head2->next = head2->next->next;
+            head2 = head2->next;
+        }
+        head1->next = NULL;
+        head2 = NULL;
+        return {h1,h2};
+    }
+};
