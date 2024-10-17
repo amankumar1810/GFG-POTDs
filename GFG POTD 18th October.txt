@@ -1,0 +1,14 @@
+// Single Number (Easy).
+
+// Isse easy question nahi ho sakta hai koi.
+class Solution {
+  public:
+    int getSingle(vector<int>& arr) {
+        // code here
+        int xorValue = 0;
+        for(auto &i:arr)
+            xorValue ^= i;
+        
+        return xorValue;
+    }
+};
