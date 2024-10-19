@@ -1,0 +1,36 @@
+// Nearest Multiple of 10 (Easy).
+
+// logical question hai ye.
+class Solution {
+  public:
+    string roundToNearest(string str) {
+        // Complete the function
+        int n = str.size();
+        int last = str[n-1]-'0';
+        
+        // less than or equal to 5 hai to kam karna hai.
+        if(last <= 5){
+            str[n-1] = '0';
+            return str;
+        }
+        else{
+            // last ko 0 banao aur aage badh jaao.
+            str[n-1] = '0';
+            int carry = 1;
+            for(int i=n-2;i>=0;i--){
+                int num = str[i]-'0';
+                int sum = num+carry;
+                str[i] = '0'+sum%10;    // string me badal diye hai.
+                carry = sum/10;     // 10 wale value se deal kiye hai.
+                
+                // matlab pura ho gya operations.
+                if(carry == 0)
+                    break;
+            }
+            // Agar sab 9999 ho tab.
+            if(carry==1)
+                return "1"+str;
+            return str;
+        }
+    }
+};
