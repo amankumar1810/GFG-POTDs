@@ -1,0 +1,38 @@
+// Find the Sum of Last N nodes of the Linked List (Easy).
+
+// Bahut hi basic question hai ye.
+/*
+    Last ke n nodes ka sum nikaalna hai.
+    To piche se to access nahi kar sakte hai.
+    
+    Tarika ye hai ki aage se waha tak pahuch jaaye taaki ab
+    n nodes bacha reh jaaye.
+    Phir unka sum nikaal denge.
+*/
+class Solution {
+  public:
+    int sumOfLastN_Nodes(struct Node* head, int n) {
+        // Code here
+        int count = 0;
+        Node *temp = head;
+        
+        // Total nodes.
+        while(temp){
+            count++;
+            temp = temp->next;
+        }
+        count = count - n;
+        temp = head;
+        while(count--){
+            temp = temp->next;
+        }
+        
+        // Ab humare paas n nodes bache hai aage.
+        int sum = 0;
+        while(temp!=NULL){
+            sum+=temp->data;
+            temp = temp->next;
+        }
+        return sum;
+    }
+};
