@@ -1,0 +1,17 @@
+// Occurence of an integer in a Linked List (Easy).
+
+// bahut hi standard question hai ye.
+class Solution {
+  public:
+    int count(struct Node* head, int key) {
+        // add your code here
+        int cnt = 0 ;
+        Node* head1 = head;
+        while(head1!=NULL){
+            if(head1->data==key)
+                cnt++;
+            head1 = head1->next;
+        }
+        return cnt;
+    }
+};
