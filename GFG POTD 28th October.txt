@@ -1,0 +1,25 @@
+// Remove duplicates in array (Easy).
+
+// bahut hi dimaag lagana par gaya is question mein.
+// main dikkat sahi order mein laane mein ho rahi thi.
+
+/*
+    Jo first time mil raha hai, usko ans vector mein daal lenge.
+    Har element ko phir set mein daalte rahenge.
+*/
+class Solution {
+  public:
+    vector<int> removeDuplicate(vector<int>& arr) {
+        // code here
+        int n = arr.size();
+        unordered_set<int> st;
+            
+        vector<int> ans;
+        for(int i=0;i<n;i++){
+            if(st.find(arr[i])==st.end())
+                ans.push_back(arr[i]);
+            st.insert(arr[i]);
+        }
+        return ans;
+    }
+};
