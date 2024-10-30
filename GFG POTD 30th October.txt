@@ -1,0 +1,24 @@
+// Pairs with difference k (Easy).
+
+// Khud se ban gaya ye question .
+/*
+    Basically dekhna hai ki pair mil raha hai ki nahi.
+    Nested for-loop naa lagakar hum map ka use kar liye hai.
+*/
+class Solution {
+  public:
+    int countPairsWithDiffK(vector<int>& arr, int k) {
+        // Sort karne se sahi access ho paayega.
+        // k se bade value ko hi deal karenge
+        // arr[i]-k hai ki nahi ye dekhna hai.
+        sort(arr.begin(),arr.end());
+        int ans = 0;
+        map<int,int> mp;
+        for(auto &i:arr){
+            if(i>=k && mp.find(i-k)!=mp.end())
+                ans+=mp[i-k];   // duplicates ko deal karne ke liye hai.
+            mp[i]++;
+        }
+        return ans;
+    }
+};
