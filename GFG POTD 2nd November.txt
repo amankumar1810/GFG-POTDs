@@ -1,0 +1,38 @@
+// Kth Distance (Easy). 
+
+// Question ko hum galat samajh hi rahe the.
+/*
+    Hume (k+1) length ke window mein find karna hai ki koi repeating hai ki nahi.
+    Sabse first (k+1) length wale mein dekh lenge.
+    
+    Ab aage se 1 element daalenge aur piche se nikaalenge.
+    Duplicate freq. check karte rahenge.
+*/
+class Solution {
+  public:
+    bool checkDuplicatesWithinK(vector<int>& arr, int k) {
+        // your code
+        int n = arr.size();
+        map<int,int> mp;
+        
+        // Starting ke first (K+1) element.
+        for(int i=0;i<=k;i++)
+            mp[arr[i]]++;
+            
+        for(auto &i:mp){
+            if(i.second>1)
+                return true;
+        }
+        int i=0;
+        int j=k+1;
+        while(j<n){
+            mp[arr[j]]++;
+            mp[arr[i]]--;
+            if(mp[arr[j]]>1)
+                return true;
+            i++;
+            j++;
+        }
+        return false;
+    }
+};
