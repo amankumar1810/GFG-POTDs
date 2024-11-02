@@ -1,0 +1,17 @@
+// Is Linked List Length Even? (Basic).
+
+// Bas thoda sa pointer ka dekhna hai hume.
+class Solution {
+  public:
+    bool isLengthEven(struct Node **head) {
+        // Code here
+        // isko isi tarah se define kiya gaya hai.
+        Node *head1 = *head;
+        int cnt = 0;
+        while(head1){
+            cnt++;
+            head1 = head1->next;
+        }
+        return cnt%2==0;
+    }
+};
