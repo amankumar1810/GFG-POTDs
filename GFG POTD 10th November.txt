@@ -1,0 +1,19 @@
+// Union of Two Sorted Arrays with Distinct Elements (Easy).
+
+// One possible solution.
+class Solution {
+  public:
+    vector<int> findUnion(vector<int> &a, vector<int> &b) {
+        // Isme ordered set me saare values ko daal denge.
+        set<int> st;
+        for(auto &i:a)
+            st.insert(i);
+        for(auto &i:b)
+            st.insert(i);
+        // Ab waapas ek new answer vector mein daalenge saare values ko.
+        vector<int> ans;
+        for(auto &i:st)
+            ans.push_back(i);
+        return ans;
+    }
+};
