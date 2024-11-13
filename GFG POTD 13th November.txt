@@ -1,0 +1,53 @@
+// Intersection Point in Y Shaped Linked Lists(Medium).
+
+// ye better method hai.
+/*
+    Isme length ka diff. nikaal liye hai.
+    Ab jo bada hai, usme compensate kar liye hai.
+    
+    Ab hoga ye ki dono LL same length ka ho gaya hai.
+    Jisse ab agar koi same node hoga to traversal mein mil jaayega.
+*/
+class Solution {
+  // Function for finding length.
+  private:
+    int length(Node *head1){
+        int len = 0;
+        while(head1){
+            len++;
+            head1 = head1->next;
+        }
+        return len;
+    }
+  public:
+    // Function to find intersection point in Y shaped Linked Lists.
+    int intersectPoint(Node* head1, Node* head2) {
+        // Your Code Here
+        int len1 = length(head1);
+        int len2 = length(head2);
+        int diff = abs(len1-len2);
+        
+        // length Compensation.
+        if(len1>len2){
+            while(diff--){
+                head1 = head1->next;
+            }
+        }
+        else if(len2>len1){
+            while(diff--){
+                head2 = head2->next;
+            }
+        }
+        
+        // Finding same node.
+        while(head1 && head2){
+            if(head1==head2)
+                return head1->data;
+            head1 = head1->next;
+            head2 = head2->next;
+        }
+        
+        // otherwise -1.
+        return -1;
+    }
+};
