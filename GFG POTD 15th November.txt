@@ -1,0 +1,28 @@
+// Second Largest(Easy).
+
+// Abhi jaakar finally solve hua ye.
+class Solution {
+  public:
+    int getSecondLargest(vector<int> &arr) {
+        int n = arr.size();
+        int max1 = 0,max2 = 0;
+        for(int i=0;i<n;i++){
+            // Normal Method
+            if(arr[i]>max1){
+                max2 = max1;
+                max1 = arr[i];
+            }
+            // 2nd maximum ke liye thoda dhyaan dena hoga.
+            else if(arr[i]>max2){
+                // agar first ke equal hai to wo nahi le sakte hai value.
+                if(arr[i]<max1)
+                    max2 = arr[i];
+            }
+        }
+        
+        // dono same ho ya max2 mila hi nahi to -1 return karne ko bola gaya hai.
+        if(max2==max1 || max2 == 0)
+            return -1;
+        return max2;
+    }
+};
