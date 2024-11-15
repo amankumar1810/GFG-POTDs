@@ -1,0 +1,23 @@
+// bahut hi easy question hai ye.
+// Move All Zeroes to End(Easy).
+
+// Bahut hi easy question hai ye.
+// Ek hi baar mein khud se ban gaya tha.
+
+class Solution {
+  public:
+    void pushZerosToEnd(vector<int>& arr) {
+        /*
+            >0 wala number mile to suru mein daalte raho.
+            Aur phr sabhi ko 0 kar do.
+        */
+        int n = arr.size();
+        int k = 0;
+        for(int i=0;i<n;i++){
+            if(arr[i]>0)
+                arr[k++] = arr[i];
+        }
+        for(;k<n;k++)
+            arr[k] = 0;
+    }
+};
