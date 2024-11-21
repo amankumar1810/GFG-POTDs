@@ -1,0 +1,25 @@
+// Stock Buy and Sell – Max one Transaction Allowed(Easy).
+
+// Bahut hi easy question hai ye.
+/*
+    Agar kam daam mein aaj lete hai aur jyada daam mein sell karte hai
+    tab hume profit hoga.
+    
+    Bas aise hi nikaal liye hai.
+*/
+class Solution {
+  public:
+    int maximumProfit(vector<int> &prices) {
+        // code here
+        int n = prices.size();
+        int maxi = prices[n-1];
+        int ans = 0;
+        for(int i=n-2;i>=0;i--){
+            if(prices[i]<maxi)
+                ans = max(ans,maxi-prices[i]);
+            else
+                maxi = prices[i];
+        }
+        return ans;
+    }
+};
