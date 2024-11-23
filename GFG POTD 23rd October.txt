@@ -1,0 +1,23 @@
+// Minimize the Heights I(Medium).
+
+// CodeKarLo se seekhe hai isko.
+/*
+    2 part mein array divide kar rahe hai.
+    Ab mini and maxi nikaal liye hai.
+*/
+class Solution {
+  public:
+    int getMinDiff(int k, vector<int> &arr) {
+        // code here
+        int n = arr.size();
+        sort(arr.begin(),arr.end());
+        int ans = arr[n-1]-arr[0];
+        
+        for(int i=1;i<n;i++){
+            int mini = min(arr[0]+k,arr[i]-k);
+            int maxi = max(arr[n-1]-k,arr[i-1]+k);
+            ans = min(ans,maxi-mini);
+        }
+        return ans;
+    }
+};
