@@ -1,0 +1,27 @@
+// Kadane's Algorithm. (Medium)
+
+class Solution {
+  public:
+    // Ek dum Standard questio hai ye.
+    // PlaceWit se seekhe the isko.
+    int maxSubarraySum(vector<int> &arr) {
+        /*
+            Hum humesha try kerenge ki subarray ka sum maximize ho sake.
+            Agar (-ve) milega to usko 0 mein covert kar denge.
+        */
+        int n = arr.size();
+        int sum = 0;
+        int ans = INT_MIN;
+        
+        // Hume at least 1 element to lena hi hai.
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            ans = max(ans,sum);
+            
+            // Yaha answer 0 nahi milega kyu ki upar wo store ho chuka hai answer mein.
+            if(sum<0)
+                sum = 0;
+        }
+        return ans;
+    }
+};
