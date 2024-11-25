@@ -1,0 +1,31 @@
+// Maximum Product Subarray (Medium).
+
+// Logicakl question hai ye wala.
+/*
+    Kadane's Algorithm mein to (-ve) ko liya hi nahi tha.
+    Isme 2 (-ve) ka product (+ve) ho jaayega to unko lena hoga.
+*/
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n = nums.size();
+        int maxi = 1,mini = 1;
+        int ans = nums[0];
+
+        for(int i=0;i<n;i++){
+            // (-ve) se multiply karne par (+ve) (-ve) ban jaata hai aur (-ve) (+ve)
+            if(nums[i]<0)
+                swap(maxi,mini);
+
+            // Is section ka logic ye hai ki yaa to maxi and mini opposite sign ka ho gaya hai.
+            // Agar aisa hai to nums[i] sab par bhaari padega.
+            // Nhi to multiply kar lo.
+            maxi = max(nums[i],nums[i]*maxi);
+            mini = min(nums[i],nums[i]*mini);
+
+            // Kyu ki maxi mein hi value store hua hai to isi ka comparison karenge.
+            ans = max(ans,maxi);
+        }
+        return ans;
+    }
+};
