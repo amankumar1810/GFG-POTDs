@@ -1,0 +1,22 @@
+// Shortest Missing Positive Number(Medium).
+
+// Basic Approach used.
+class Solution {
+  public:
+    int missingNumber(vector<int> &arr) {
+        // Your code here
+        int n = arr.size();
+        sort(arr.begin(),arr.end());
+        int val = 1;
+        for(int i=0;i<n;i++){
+            if(arr[i]<0)    // ignore negatives.
+                continue;
+            else if(arr[i]==val)    // Mil raha hai to theek hai.
+                val++;
+            else if(arr[i]>val)     // Jo nahi mila wahi answer hoga.
+                return val;
+        }
+        // Agar sab value mil gaya to last wala automatically aa jaayega.
+        return val;
+    }
+};
