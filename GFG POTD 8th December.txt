@@ -1,0 +1,38 @@
+// Overlapping Intervals. (Medium).
+
+// Study LC 56.
+class Solution {
+  public:
+    vector<vector<int>> mergeOverlap(vector<vector<int>>& intr) {
+        // Code here
+        sort(intr.begin(),intr.end());
+        int last = 0; // 1st element se start karenge checking.
+        for(int i=1;i<intr.size();i++){
+            // 2 interval ke elements ko compare karenge.
+            int a = intr[last][0];
+            int b = intr[last][1];
+            int c = intr[i][0];
+            int d = intr[i][1];
+
+            // ab yaha se comparison wala part start hota hai.
+
+            // Iska matlab new interval banana hoga. 
+            if(c>b){
+                last++;
+                // Array ko modify kar diye.
+                intr[last] = intr[i];
+            }
+            else{
+                // yaha par new interval ban raha hai.
+                // interval ka starting and ending isi se decide hoga.
+                intr[last][0] = min(a,c);
+                intr[last][1] = max(b,d);
+            }
+        } 
+        // Purane wala vector modify hokar return ho raha hai.
+        // Ek naya vector bana kar usme is modified intr vector ka elements store kar diye hai.
+        // New vector kaise bana wo dhyaan do.
+        vector<vector<int>> ans(intr.begin(),intr.begin()+last+1);
+        return ans;    
+    }
+};
