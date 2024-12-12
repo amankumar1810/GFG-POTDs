@@ -1,0 +1,14 @@
+// Number of Occurences (Easy).
+
+// O(log N) Time complexity.
+class Solution {
+  public:
+    int countFreq(vector<int>& arr, int target) {
+        // code here
+        int lb = lower_bound(arr.begin(),arr.end(),target)-arr.begin();
+        if(arr[lb]!=target)
+            return 0;
+        int ub = upper_bound(arr.begin(),arr.end(),target)-arr.begin();
+        return ub-lb;
+    }
+};
