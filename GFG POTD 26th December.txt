@@ -1,0 +1,16 @@
+// Two Sum - Pair with Given Sum(Easy).
+
+// One of the initial question of PlaceWit classes.
+class Solution {
+  public:
+    bool twoSum(vector<int>& arr, int target) {
+        // code here
+        unordered_map<int,int> mp;
+        for(auto &i:arr){
+            if(mp.find(target-i)!=mp.end())
+                return true;
+            mp[i]++;
+        }
+        return false;
+    }
+};
