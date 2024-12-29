@@ -1,0 +1,24 @@
+// Intersection of Two arrays with Duplicate Elements(Easy).
+
+// Bahut hi obvious Approach use kiye hai.
+/*
+    a and b mein kya common hai, wo nikaal liye hai.
+    Duplicates remove karne ke liye ek aur set use kiye hai.
+*/
+class Solution {
+  public:
+    vector<int> intersectionWithDuplicates(vector<int>& a, vector<int>& b) {
+        // code here
+        unordered_set<int> st1,st2;
+        for(int &i:a)
+            st1.insert(i);
+        for(int &i:b){
+            if(st1.find(i)!=st1.end())
+                st2.insert(i);
+        }
+        vector<int> ans;
+        for(auto &i:st2)
+            ans.push_back(i);
+        return ans;
+    }
+};
