@@ -1,0 +1,32 @@
+// Print Anagrams Together(Medium).
+
+// New Year 2025.
+// Samajh gaye hai ache se.
+/*
+    Isme basically ek map bana liye hai jisme ek type ke saare
+    string ko store kar liye hai.
+    
+    Ab map ke values ko nikaal kar daal liye hai hum ans vector mein.
+*/
+class Solution {
+  public:
+    vector<vector<string>> anagrams(vector<string>& arr) {
+        // code here
+        int n = arr.size();
+        vector<vector<string>> ans;
+        unordered_map<string,vector<string>> mp;
+        
+        // Storing in map.
+        for(int i=0;i<n;i++){
+            string temp = arr[i];
+            sort(temp.begin(),temp.end());
+            mp[temp].push_back(arr[i]);
+        }
+        
+        // Collecting from map.
+        for(auto i = mp.begin();i!=mp.end();i++)
+            ans.push_back(i->second);
+        
+        return ans;   
+    }
+};
