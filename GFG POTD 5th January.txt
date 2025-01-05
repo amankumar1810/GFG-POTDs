@@ -1,0 +1,27 @@
+// Count Pairs whose sum is less than target(easy).
+
+// Isko Bahut se method se bana sakte hai.
+/*
+    Ye best way nahi hai.
+    Isme basically hume 2 elements ka sum<target chahiye.
+    
+    Agar koi element target ke equal ya bada to ho usko skip karo
+    Kyuki yaha par sirf positive values hai.
+*/
+class Solution {
+  public:
+    int countPairs(vector<int> &arr, int target) {
+        // Your code here
+        int n = arr.size();
+        int ans = 0;
+        for(int i=0;i<n-1;i++){
+            if(arr[i]>=target)
+                continue;
+            for(int j=i+1;j<n;j++){
+                if(arr[i]+arr[j]<target)
+                    ans++;
+            }
+        }
+        return ans;
+    }
+};
