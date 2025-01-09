@@ -1,0 +1,27 @@
+// Indexes of Subarray Sum(Medium).
+
+// Bahut hi easy question hai ye.
+/*
+    Basic Sliding Window use kar liye ahai.
+    Target achieve hone par return kar diye hai 1-based indexing.
+*/
+class Solution {
+  public:
+    vector<int> subarraySum(vector<int> &arr, int target) {
+        // code here
+        int n = arr.size();
+        int sum = 0;
+        int i=0,j=0;
+        while(j<n){
+            sum+=arr[j];
+            while(sum>target){
+                sum -= arr[i];
+                i++;
+            }
+            if(sum==target)
+                return {i+1,j+1};
+            j++;
+        }
+        return {-1};
+    }
+};
