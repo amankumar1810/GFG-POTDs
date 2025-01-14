@@ -1,0 +1,22 @@
+// Equilibrium Point (Easy).
+
+class Solution {
+  public:
+    // Function to find equilibrium point in the array.
+    int findEquilibrium(vector<int> &arr) {
+        // code here
+        int n = arr.size();
+        int sum = 0;
+        for(int &i:arr)
+            sum+=i;
+        int ans = -1;
+        int left = 0,right=0;
+        for(int i=1;i<n;i++){
+            left += arr[i-1];
+            right = sum-arr[i]-left;
+            if(left==right)
+                return i;
+        }
+        return ans;
+    }
+};
