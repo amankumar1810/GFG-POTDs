@@ -1,21 +1,29 @@
-// Equilibrium Point (Easy).
+// Longest Subarray with Sum K(Medium).
 
+// Ye approach pehle bhi follow hua hai.
+/*
+    Isme hum indexes ko store kar rahe hai.
+    Agar sum-k pehle mila hai matlab yaha tak ke subarray ka sum k hai.
+    Isi ka length nikaal liye hai.
+    
+    Hum chaahenge ki index as small as possible ho taaki
+    hume longest value mil sake.
+*/
 class Solution {
   public:
-    // Function to find equilibrium point in the array.
-    int findEquilibrium(vector<int> &arr) {
+    int lenOfLongestSubarr(vector<int>& arr, int k) {
         // code here
         int n = arr.size();
-        int sum = 0;
-        for(int &i:arr)
-            sum+=i;
-        int ans = -1;
-        int left = 0,right=0;
-        for(int i=1;i<n;i++){
-            left += arr[i-1];
-            right = sum-arr[i]-left;
-            if(left==right)
-                return i;
+        unordered_map<int,int> mp;
+        mp[0]=-1;   // Agar sum==k aa jaaye suru mein hi to.
+        int ans = 0;
+        long long sum=0;    // Yaha 1e9 tak value hai.
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            if(mp.find(sum-k)!=mp.end())    // pehle mil chuka hai.
+                ans=max(ans,i-mp[sum-k]);
+            if(mp.find(sum)==mp.end())  // nahi hai to hi update karenge.
+                mp[sum]=i;
         }
         return ans;
     }
