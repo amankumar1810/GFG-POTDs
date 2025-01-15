@@ -1,0 +1,32 @@
+// Largest subarray of 0's and 1's(Easy).
+
+// Wahi map wala process use hua hai.
+/*
+    0 and 1 ko distinguish karne ke liye 1 par sum++ and 0 par sum-- kiye hai.
+    Hum map mein index daalenge taaki maximum length mil sake.
+    
+    Wahi maxm length ke liye minimum index rakh rahe hai particualr sum ke liye.
+    
+*/
+class Solution {
+  public:
+    int maxLen(vector<int> &arr) {
+        // Your code here
+        int n = arr.size();
+        unordered_map<int,int> mp;
+        mp[0] = -1;
+        int sum = 0;
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            if(arr[i]==0)
+                sum++;
+            else
+                sum--;
+            if(mp.find(sum)!=mp.end())
+                ans = max(ans,i-mp[sum]);
+            else
+                mp[sum] = i;
+        }
+        return ans;
+    }
+};
