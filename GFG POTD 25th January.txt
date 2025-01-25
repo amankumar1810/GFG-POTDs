@@ -1,0 +1,28 @@
+// Find the first node of loop in linked list(Medium).
+
+// Common Approach.
+class Solution {
+public:
+    Node* findFirstNode(Node* head) {
+        // your code here
+        Node *slow = head, *fast = head;
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast) {
+                // Loop Found.
+                break;
+            }
+        }
+        // No loop.
+        if(slow!=fast)
+            return NULL;
+        // FInding Node.
+        slow = head;
+        while (slow != fast) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        return slow;
+    }
+};
