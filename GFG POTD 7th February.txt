@@ -1,0 +1,22 @@
+// Inorder Traversal(Easy).
+
+// Starting dino mein hi ye seekh liye the.
+class Solution {
+  private:
+    vector<int> solve(Node *root,vector<int> &inorder){
+        if(!root)
+            return {};
+        solve(root->left,inorder);
+        inorder.push_back(root->data);
+        solve(root->right,inorder);
+        return inorder;
+    }
+  public:
+    // Function to return a list containing the inorder traversal of the tree.
+    vector<int> inOrder(Node* root) {
+        // Your code here
+        vector<int> inorder;
+        solve(root,inorder);
+        return inorder;
+    }
+};
