@@ -1,0 +1,19 @@
+// Check for BST(Easy).
+
+class Solution {
+  public:
+    // Bas 2 din pehle POTD me ise helper function ke roop mein use kiya tha.
+    // Aaj ye POTD me aa gaya.
+    bool isvalid(Node *root,int mini,int maxi){
+        if(!root)
+            return true;
+        if(root->data > maxi || root->data < mini)
+            return false;
+        // left ka value root se bada ya equal nahi hona chahiye.
+        // right ka value root se chhota ya equal nahi hona chahiye.
+        return isvalid(root->left,mini,root->data-1) && isvalid(root->right,root->data+1,maxi);
+    }
+    bool isBST(Node* root) {
+        return isvalid(root,INT_MIN,INT_MAX);
+    }
+};
