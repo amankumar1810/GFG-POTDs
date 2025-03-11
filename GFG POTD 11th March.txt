@@ -1,0 +1,22 @@
+// Ways to Reach the n'th Stair(Medium).
+
+// Ye Leetcode ka Climbing Stairs question hai.
+/*
+    Khud se bana liye hai isko.
+    Basically Fibonacci Series jaisa hai.
+    
+    Tabulation with Space Optimization.
+*/
+class Solution {
+  public:
+    int countWays(int n) {
+        // your code here
+        int prev = 1,prev2 = 0;
+        for(int i=0;i<n;i++){
+            int curr = prev+prev2;
+            prev2 = prev;
+            prev = curr;
+        }
+        return prev;
+    }
+};
