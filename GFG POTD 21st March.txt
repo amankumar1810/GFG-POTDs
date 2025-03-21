@@ -1,0 +1,23 @@
+// Stickler Thief(Medium).
+
+class Solution {
+  private:
+    int solve(int index,vector<int> &arr,vector<int> &dp){
+        if(index==0)
+            return arr[0];
+        if(index<0)
+            return 0;
+        if(dp[index]!=-1)
+            return dp[index];
+        int take = arr[index]+solve(index-2,arr,dp);
+        int notTake = 0+solve(index-1,arr,dp);
+        return dp[index] = max(take,notTake);
+    }
+  public:
+    int findMaxSum(vector<int>& arr) {
+        // code here
+        int n = arr.size();
+        vector<int> dp(n,-1);
+        return solve(n-1,arr,dp);
+    }
+};
