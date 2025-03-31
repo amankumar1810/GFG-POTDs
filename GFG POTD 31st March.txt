@@ -1,0 +1,33 @@
+// Maximize partitions in a String(Medium).
+
+// Solution padhkar samajh gaye hai isko.
+/*
+    Basically isme karna ye hai ki hum dekhenge ki 
+    last occurence tak pahuch paaye hai ki nahi.
+    Sabse pehle hum har character ka last occurence store kar liye hai.
+    
+    Ab last variable ye bata raha hai ki kaha tak abhi tak aa chuka 
+    hua character present hai aage mein.
+    Agar khatam ho gaya hai character, to partition count increase kar denge.
+*/
+class Solution {
+  public:
+    int maxPartitions(string &s) {
+        // code here
+        int n = s.size();
+        // Storing last occurence in 26-size vector.
+        vector<int> v(26,-1);
+        for(int i=n-1;i>=0;i--){
+            if(v[s[i]-'a']==-1)
+                v[s[i]-'a'] = i;
+        }
+        int cnt = 0;
+        int last=-1;
+        for(int i=0;i<n;i++){
+            last = max(last,v[s[i]-'a']);
+            if(last==i)
+                cnt++;
+        }
+        return cnt;
+    }
+};
