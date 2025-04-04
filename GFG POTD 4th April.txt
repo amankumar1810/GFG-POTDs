@@ -1,38 +1,42 @@
-// Undirected Graph Cycle(Medium).
+// Find the number of islands(Medium).
 
-// Question ko little bit change kar diya hai, phir bhi ban gaya.
+// Leetcode wale question se thoda different kar diya hai yaha par.
+/*
+    Yaha par horizontally, vertically as well as diagonally bhi diya hai.
+    Yaani ki 4 ki jagah 8 direction mein hai.
+    
+    Khud se implement kar liye the isko.
+*/
 class Solution {
   private:
-    bool dfs(int node,vector<vector<int>> &adj,vector<int> &vis,int par){
-        vis[node] = 1;
-        for(int &i:adj[node]){
-            if(!vis[i]){
-                if(dfs(i,adj,vis,node))
-                    return true;
-            }
-            else if(i!=par)
-                return true;
+    void dfs(int r,int c,vector<vector<char>> &grid,vector<vector<int>> &vis){
+        int n = grid.size();
+        int m = grid[0].size();
+        vis[r][c] = 1;
+        int rdir[] = {0,1,1,1,0,-1,-1,-1};
+        int cdir[] = {-1,-1,0,1,1,1,0,-1};
+        for(int i=0;i<8;i++){
+            int nrow = r+rdir[i];
+            int ncol = c+cdir[i];
+            if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && grid[nrow][ncol]=='L' && !vis[nrow][ncol])
+                dfs(nrow,ncol,grid,vis);
         }
-        return false;
     }
   public:
-    bool isCycle(int V, vector<vector<int>>& edges) {
+    int countIslands(vector<vector<char>>& grid) {
         // Code here
-        int E = edges.size();
-        vector<vector<int>> adj(V);
-        for(int i=0;i<E;i++){
-            int u = edges[i][0];
-            int v = edges[i][1];
-            adj[u].push_back(v);
-            adj[v].push_back(u);
-        }
-        vector<int> vis(V,0);
-        for(int i=0;i<V;i++){
-            if(!vis[i]){
-                if(dfs(i,adj,vis,-1))
-                    return true;
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>> vis(n,vector<int> (m,0));
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]=='L' && !vis[i][j]){
+                    ans++;
+                    dfs(i,j,grid,vis);
+                }
             }
         }
-        return false;
+        return ans;
     }
 };
