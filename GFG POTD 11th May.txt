@@ -1,0 +1,28 @@
+// K-th Largest Sum Contiguous Subarray(Medium).
+
+// Jabardasti streak maintain karne ka ye last POTD hai.
+/*
+    Khud se ban gaya, brute force approach hi hai.
+    Basically saare subarray ka sum nikaal liye hai.
+    Reverse sort karke k-th largest element nikaal liye hai.
+    Duplicate ko bhi consider karna hai.
+*/
+class Solution {
+  public:
+    int kthLargest(vector<int> &arr, int k) {
+        // code here
+        int n = arr.size();
+        vector<int> nums;
+        // Finding sum of all possible subarrays.
+        for(int i=0;i<n;i++){
+            int sum = 0;
+            for(int j=i;j<n;j++){
+                sum+=arr[j];
+                nums.push_back(sum);
+            }
+        }
+        
+        sort(nums.rbegin(),nums.rend());
+        return nums[k-1];
+    }
+};
