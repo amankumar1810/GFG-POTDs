@@ -1,0 +1,25 @@
+// Substrings with same first and last characters(Easy).
+
+// Easy question hai ye, Solution padhkar samjhe hai.
+/*
+    Basically saare substring generate kiye bina hum pata lagaye hai.
+    Freq. count kar liye hai.
+    
+    Ab kitne tarah se 2 letter select kiya jaa sakta hai, wo nikaal liye hai.   
+*/
+class Solution {
+  public:
+    int countSubstring(string &s) {
+        // code here
+        int n = s.size();
+        int ans = 0;
+        vector<int> v(26);
+        for(auto &i:s)
+            v[i-'a']++;
+        for(int i=0;i<26;i++){
+            int temp = v[i];
+            ans+=(temp*(temp+1))/2;
+        }
+        return ans;
+    }
+};
