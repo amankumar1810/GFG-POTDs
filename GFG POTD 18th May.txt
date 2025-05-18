@@ -1,0 +1,35 @@
+// Level Order in Spiral Form(Easy).
+
+// LC 103 se hint liye hai, waise bahut easy question hai ye.
+class Solution {
+  public:
+    vector<int> findSpiral(Node* root) {
+        // code here
+        vector<int> ans;
+        if(!root)
+            return {};
+        queue<Node*> q;
+        q.push(root);
+        bool flag = true;
+        while(!q.empty()){
+            int sz = q.size();
+            vector<int> level(sz);
+            for(int i=0;i<sz;i++){
+                Node *curr = q.front();
+                q.pop();
+                if(curr->left)
+                    q.push(curr->left);
+                if(curr->right)
+                    q.push(curr->right);
+                if(!flag)
+                    level[i] = curr->data;
+                else
+                    level[sz-1-i] = curr->data;
+            }
+            flag = !flag;
+            for(int &i:level)
+                ans.push_back(i);
+        }
+        return ans;
+    }
+};
